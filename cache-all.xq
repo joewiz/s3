@@ -38,8 +38,8 @@ declare function local:get-child-resources($marker, $prefix, $content-cache) {
     let $contents := $list/s3:ListBucketResult/s3:Contents[s3:Key ne $prefix]
     let $consolidated-results := ($content-cache, $contents)
     return
-        if ($list/httpclient:body/s3:ListBucketResult/s3:IsTruncated eq 'true') then
-            let $next-marker := $list/httpclient:body/s3:ListBucketResult/s3:NextMarker
+        if ($list/s3:ListBucketResult/s3:IsTruncated eq 'true') then
+            let $next-marker := $list/s3:ListBucketResult/s3:NextMarker
             return
                 local:get-child-resources($next-marker, $prefix, $consolidated-results)
         else
