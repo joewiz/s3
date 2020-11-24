@@ -3,3 +3,5 @@ build/*
 cache
 modules/aws_config.xqm
 .DS_Store
+expath-pkg.xml
+repo.xml
