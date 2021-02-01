@@ -5,6 +5,7 @@ import module namespace unzip = "http://joewiz.org/ns/xquery/unzip" at "https://
 import module namespace http="http://expath.org/ns/http-client";
 import module namespace util="http://exist-db.org/xquery/util";
 import module namespace xmldb="http://exist-db.org/xquery/xmldb";
+import module namespace hsg-config = "http://history.state.gov/ns/site/hsg/config" at '/db/apps/hsg-shell/modules/config.xqm';
 
 (: the following module was copied from https://gist.github.com/joewiz/5938909 :)
 
@@ -75,7 +76,7 @@ declare function local:http-download($file-url as xs:string, $collection as xs:s
             <error><message>Oops, something went wrong:</message>{$head}</error>
 };
 
-let $url := 'https://s3.amazonaws.com/static.history.state.gov/temp/static.history.state.gov-ebooks-s3-cache.zip'
+let $url := $hsg-config:S3_URL || '/temp/static.history.state.gov-ebooks-s3-cache.zip'
 return
     try {
         let $collection := xmldb:create-collection('/db', 'hsg-temp')

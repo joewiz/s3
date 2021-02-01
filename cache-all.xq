@@ -6,9 +6,10 @@ import module namespace aws_config = "http://history.state.gov/ns/xquery/aws_con
 import module namespace bucket = 'http://www.xquery.co.uk/modules/connectors/aws/s3/bucket' at 'modules/xaws/modules/uk/co/xquery/www/modules/connectors/aws-exist/s3/bucket.xq';
 
 declare namespace s3="http://s3.amazonaws.com/doc/2006-03-01/";
-declare namespace functx = "http://www.functx.com"; 
+declare namespace functx = "http://www.functx.com";
+import module namespace hsg-config = "http://history.state.gov/ns/site/hsg/config" at '/db/apps/hsg-shell/modules/config.xqm';
 
-declare variable $local:bucket := 'static.history.state.gov';
+declare variable $local:bucket := $hsg-config:S3_BUCKET;
 
 declare function functx:substring-after-last-match 
   ( $arg as xs:string? ,
